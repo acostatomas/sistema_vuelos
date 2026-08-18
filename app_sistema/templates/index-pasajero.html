@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    {% include 'navbar-pasajero.html' %}
+    <h1 class="text-center py-4 mt-auto">GESTIONÁ TUS RESERVAS ONLINE</h1>
+    <p class="lead text-center">¿Adónde vamos?</p>
+    <div  class="flex-grow-1 container mt-4">
+        <span class="lead">NUEVOS VUELOS</span>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <th>Código</th>
+                <th>Origen</th>
+                <th>Destino</th>
+                <th>Capacidad</th>
+                <th>Fecha</th>
+                <th>Hora salida</th>
+                <th>Hora embarque</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                 {% for item in vuelos_info %}
+                    <tr>
+                        <td>{{ item.vuelo.codigo }}</td>
+                        <td>{{ item.vuelo.origen }}</td>
+                        <td>{{ item.vuelo.destino }}</td>
+                        <td>{{ item.vuelo.capacidad }}</td>
+                        <td>{{ item.vuelo.fecha|date:"j \\d\\e F \\d\\e Y" }}</td>
+                        <td>{{ item.vuelo.hora_salida }}</td>
+                        <td>{{ item.vuelo.hora_embarque }}</td>
+                        <td>
+                            {% if item.ya_reservado %}
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <button class="btn btn-primary">Reservado</button>
+                                </form>
+                            {% else %}
+                                <a href="{% url 'crearReserva' item.vuelo.id user.id%}" class="btn btn-success">Crear Reserva</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8">No hay vuelos cargados.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-4 mt-auto">
+        <p class="mb-0"> &copy; Acosta Tomás - UCEMA</p>
+    </footer>
+</body>
+</html>

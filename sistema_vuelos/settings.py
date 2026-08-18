@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = '/login/' #¿dónde se hace el login?
+LOGIN_REDIRECT_URL = '/inicio/' #¿adónde redirijo al ususario cuando haga login?
+LOGOUT_REDIRECT_URL = '/login/' #cuando hace logout, ¿adónde lo redirijo? Esto igual está configurado en la vista correspondiente al logout
+LANGUAGE_CODE = 'es-ar'  # o 'es' si no estás en Argentina
+USE_L10N = True
 
 # Application definition
 
@@ -55,7 +60,7 @@ ROOT_URLCONF = 'sistema_vuelos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 

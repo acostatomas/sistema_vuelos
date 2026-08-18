@@ -1,0 +1,16 @@
+.boton-editar
+{
+    text-decoration: none;
+    color: black;
+}
+.boton-eliminar
+{
+    text-decoration: none;
+    color: black;
+}
+#div-footer
+{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
